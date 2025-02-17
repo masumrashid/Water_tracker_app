@@ -115,19 +115,24 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 40,
             ),
-            AddWater(
-              amount: 100,
-              icon: Icons.local_drink,
-              Onclick: () => _waterAdd(100),
-            ),
-            AddWater(
-              amount: 200,
-              Onclick: () => _waterAdd(200),
-            ),
-            AddWater(
-              amount: 500,
-              icon: Icons.local_cafe,
-              Onclick: () => _waterAdd(500),
+            Wrap(
+              spacing: 15,
+              children: [
+                AddWater(
+                  amount: 100,
+                  icon: Icons.local_drink,
+                  Onclick: () => _waterAdd(100),
+                ),
+                AddWater(
+                  amount: 200,
+                  Onclick: () => _waterAdd(200),
+                ),
+                AddWater(
+                  amount: 500,
+                  icon: Icons.local_cafe,
+                  Onclick: () => _waterAdd(500),
+                ),
+              ],
             ),
             SizedBox(
               height: 30,
@@ -143,7 +148,7 @@ class _HomeState extends State<Home> {
                     onPressed: () => _reset(),
                     child: Text(
                       'Reset',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: 25, color: Colors.white),
                     )),
               ),
             )
