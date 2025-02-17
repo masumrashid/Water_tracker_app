@@ -1,9 +1,14 @@
-
 import 'package:flutter/material.dart';
 
 class AddWater extends StatelessWidget {
-  const AddWater({
+  final int amount;
+  IconData? icon;
+  final VoidCallback Onclick;
+  AddWater({
     super.key,
+    required this.amount,
+    this.icon,
+    required this.Onclick,
   });
 
   @override
@@ -11,19 +16,23 @@ class AddWater extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurpleAccent,
             ),
-            onPressed: () {},
+            onPressed: Onclick,
             label: Text(
-              '100ml',
+              '${amount} ml',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                   fontWeight: FontWeight.w600),
-            ),icon: Icon(Icons.water_drop,color: Colors.white,)),
+            ),
+            icon: Icon(
+              icon ?? Icons.water_drop,
+              color: Colors.white,
+            )),
       ),
     );
   }

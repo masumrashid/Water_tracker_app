@@ -25,8 +25,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _currentTake = 0;
+  final _goal = 2000;
+
+  void _waterAdd(int amount) {
+    setState(() {
+      if (_currentTake < _goal) {
+        _currentTake = (_currentTake + amount).clamp(0, _goal);
+      }
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      _currentTake = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    double progress = (_currentTake / _goal).clamp(0.0, 1.0);
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
@@ -56,7 +74,7 @@ class _HomeState extends State<Home> {
                   ]),
               child: Column(
                 children: [
-                  Text('Today in',
+                  Text('Today in Take',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -64,7 +82,7 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text('100ml',
+                  Text('${_currentTake} ml',
                       style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w900,
@@ -82,14 +100,14 @@ class _HomeState extends State<Home> {
                   height: 150,
                   width: 150,
                   child: CircularProgressIndicator(
-                    value: 0.7,
+                    value: progress,
                     backgroundColor: Colors.grey.shade300,
                     color: Colors.blue,
                     strokeWidth: 10,
                   ),
                 ),
                 Text(
-                  '70%',
+                  '${(progress * 100).toInt()}%',
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
                 )
               ],
@@ -97,22 +115,35 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 40,
             ),
-            AddWater(),
-            AddWater(),
-            AddWater(),
+            AddWater(
+              amount: 100,
+              icon: Icons.local_drink,
+              Onclick: () => _waterAdd(100),
+            ),
+            AddWater(
+              amount: 200,
+              Onclick: () => _waterAdd(200),
+            ),
+            AddWater(
+              amount: 500,
+              icon: Icons.local_cafe,
+              Onclick: () => _waterAdd(500),
+            ),
             SizedBox(
               height: 30,
             ),
-            SizedBox(width: double.infinity,
+            SizedBox(
+              width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: ElevatedButton(style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red.shade300,
-                ),
-                    onPressed: () {},
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade300,
+                    ),
+                    onPressed: () => _reset(),
                     child: Text(
                       'Reset',
-                      style: TextStyle(fontSize: 20,color: Colors.white),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     )),
               ),
             )
