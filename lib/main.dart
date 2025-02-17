@@ -98,23 +98,24 @@ class _HomeState extends State<Home> {
               height: 40,
             ),
             AddWater(),
-            SizedBox(
-              height: 10,
-            ),
             AddWater(),
-            SizedBox(
-              height: 10,
-            ),
             AddWater(),
             SizedBox(
               height: 30,
             ),
-            ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  'Reset',
-                  style: TextStyle(fontSize: 20),
-                ))
+            SizedBox(width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red.shade300,
+                ),
+                    onPressed: () {},
+                    child: Text(
+                      'Reset',
+                      style: TextStyle(fontSize: 20,color: Colors.white),
+                    )),
+              ),
+            )
           ],
         ),
       ),
